@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} News {% endblock%}
+{%  block body %}
+
+<h1> this is our news page</h1>
+<h2> we cover {{list_of_news}} </h2>
+<p> this is our news paragraph </p>
+
+{% if my_num == 50 %}
+{% for lang in list_of_news %}
+
+<ul>
+    <li> {{lang}}</li>
+</ul>
+
+{% endfor %}
+{% else %}
+<p> check my_num context</p>
+{% endif %}
+{% endblock %}
