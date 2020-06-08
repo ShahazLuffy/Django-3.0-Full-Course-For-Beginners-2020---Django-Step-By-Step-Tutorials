@@ -1,5 +1,6 @@
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, redirect
 from .models import *
+from .forms import *
 
 
 def newsView(request):
@@ -31,11 +32,29 @@ def newsdate(request):
     return render(request, 'newsdate.html')
 
 
-
 def newsdateyear(request, year):
-    article_list = NewsDate.objects.filter(pub_date__year=year)
+    article_list = BreakingNews.objects.filter(pub_date__year=year)
     context = {
         'year': year,
         'article_list': article_list
     }
     return render(request, 'newsdate.html', context)
+
+
+def register(request):
+    context = {
+        "form": RegistrationForm
+    }
+    return render(request, 'signup.html', context)
+
+
+def addUser(request):
+    form = RegistrationForm(request.POST)
+    if form.is_valid():
+        myregister = RegistrationData(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'],
+                                    email=form.cleaned_data['email'],
+                                    phone=form.cleaned_data['phone']
+                                     )
+        myregister.save()
+    return  redirect('home')

@@ -8,7 +8,6 @@ class News(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
 
-
     def __str__(self):
         return self.author
 
@@ -41,3 +40,10 @@ class NewsDate(models.Model):
 
     def __str__(self):
         return self.author
+
+
+class RegistrationData(models.Model):
+    username = models.CharField(max_length=40)
+    password = models.CharField(max_length=100)
+    email = models.CharField(max_length=44)
+    phone = models.CharField(max_length=44)
